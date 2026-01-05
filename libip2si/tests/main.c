@@ -16,6 +16,9 @@ int main(int argc, char **argv)
     ip_putchar('A');
     ip_putchar('\n');
 
+    int r = ip_strcmp("test", "tests");
+    printf("ip_strcmp(\"test\", \"tests\") = %d\n", r);
+
     printf("string length: %d\n", ip_strlen(argv[0]));
 
     return 0;
