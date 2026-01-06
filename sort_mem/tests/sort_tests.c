@@ -64,6 +64,13 @@ void test_magic(void)
 
     data.id = 0;
     data.name = "Normal";
+
+    ip_putstr("Before Magic -> ID: ");
+    ip_putnbr(data.id);
+    ip_putstr(" | Name: ");
+    ip_putstr(data.name);
+    ip_putchar('\n');
+
     ip_struct_magic(&data);
     ip_putstr("Struct Magic Result -> ID: ");
     ip_putnbr(data.id);
