@@ -2,6 +2,8 @@
 # define IP2SI_H
 
 #include <unistd.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 // prototypes:
 void	ip_putchar(char c);
