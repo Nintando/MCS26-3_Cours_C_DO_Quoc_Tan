@@ -29,7 +29,7 @@ typedef struct s_magic {
 } t_magic;
 
 void	ip_struct_magic(t_magic *data);
-int     ip_magic_number(void *ptr, size_t n, unsigned char magic);
+int     ip_magic_number(char *file_header);
 
 #endif
 

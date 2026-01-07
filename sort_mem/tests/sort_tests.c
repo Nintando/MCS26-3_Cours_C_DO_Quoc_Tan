@@ -78,9 +78,14 @@ void test_magic(void)
     ip_putstr(data.name);
     ip_putstr("\n");
 
-    index = ip_magic_number(box, 7, 'E');
-    ip_putstr("Magic Number 'E' in 'ABCDEFG' -> Index: ");
-    ip_putnbr(index);
+    
+    char elf_box[] = {0x7f, 'E', 'L', 'F', 0x01, 0x01, 0x01};
+    int result;
+
+    result = ip_magic_number(elf_box);
+
+    ip_putstr("Is ELF header valid? (1=Yes, 0=No): ");
+    ip_putnbr(result);
     ip_putstr("\n");
 }
 
