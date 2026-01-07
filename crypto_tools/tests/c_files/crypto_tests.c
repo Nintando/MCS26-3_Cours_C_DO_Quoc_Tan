@@ -15,7 +15,7 @@ int main(void)
 
     printf("--- TEST XOR Function ---\n");
     char message[] = "Hello";
-    char key = 0x2A;
+    char key = 'X';
     
     printf("Original: %s\n", message);
     simple_xor(message, key);

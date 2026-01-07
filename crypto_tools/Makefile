@@ -17,6 +17,7 @@ SRC     = ip_putchar.c \
 	  ip_magic_number.c \
 	  ip_iterative_factorial.c \
 	  ip_pow.c \
+	  ip_file_info \
 	  simple_xor.c \
 	  ip_bin_pack.c \
 

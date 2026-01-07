@@ -35,7 +35,9 @@ int     ip_magic_number(char *file_header);
 int	ip_iterative_factorial(int nb);
 int	ip_pow(int nb, int power);
 int	ip_bin_pack(int b1, int b2, int b3, int b4);
+void	ip_file_info(char *filename);
 void	simple_xor(char *str, char key);
+
 
 #endif
 
