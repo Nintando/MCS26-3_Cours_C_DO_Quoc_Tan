@@ -1,45 +1,43 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <string.h>
 
 int main(int argc, char **argv)
 {
-    if (argc != 3)
+    int fd, len = 0, i = 0, ret;
+    char buf[4096], *data, *out;
+
+    if (argc != 3 || (fd = open(argv[1], O_RDONLY)) == -1)
         return (1);
 
-    int fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
+    while ((ret = read(fd, buf, 4096)) > 0)
+        len += ret;
+    
+    close(fd);
+    data = malloc(len);
+    fd = open(argv[1], O_RDONLY);
+    if (!data || fd == -1 || read(fd, data, len) != len)
         return (1);
-
-    off_t len = lseek(fd, 0, SEEK_END);
-    lseek(fd, 0, SEEK_SET);
-
-    unsigned char *data = malloc(len);
-    if (!data)
-        return (close(fd), 1);
-
-    read(fd, data, len);
     close(fd);
 
-    unsigned char key = argv[2][0];
-    for (size_t i = 0; i < len; i++)
-        data[i] ^= key;
+    while (i < len)
+        data[i++] ^= argv[2][0];
 
-    char *out_name = malloc(strlen(argv[1]) + 5);
-    if (!out_name)
-        return (free(data), 1);
+    for (i = 0; argv[1][i]; i++);
+    out = malloc(i + 5);
+    if (!out) return (1);
 
-    strcat(strcpy(out_name, argv[1]), ".enc");
+    for (int j = 0; j < i; j++) out[j] = argv[1][j];
+    out[i] = '.'; out[i+1] = 'e'; out[i+2] = 'n'; out[i+3] = 'c'; out[i+4] = '\0';
 
-    int out_fd = open(out_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (out_fd != -1)
+    fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd != -1)
     {
-        write(out_fd, data, len);
-        close(out_fd);
+        write(fd, data, len);
+        close(fd);
     }
-
+    
     free(data);
-    free(out_name);
+    free(out);
     return (0);
 }
