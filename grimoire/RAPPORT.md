@@ -2,14 +2,14 @@
 
 ## **Identification de la vulnérabilité**
 
-C'est une vulnérabilté mémoire de type _HEAP-BASED_/_Use-After-Free_. On la retrouve dans la fonction **main** à la ligne **71** avec le **free(active_spell)** puis elle s'execute ligne 57 **((void (*)(void))active_spell)();**.
+C'est une vulnérabilté mémoire de type _HEAP-BASED_/_Use-After-Free_. On la retrouve dans la fonction **main** à la ligne **71** avec le **free(active_spell)** puis elle s'exécute ligne 57 **((void (*)(void))active_spell)();**.
 
 ## **Analyse**
 
 La faille se trouve au niveau du **free(active_spell)** ligne 71 et n'est pas remis à NULL.
 En indiqunt le mot "Voldemort", cela provoque la déstruction.
 La taille du **chunk mémoire** est de **128**.
-Elle est utilisé ensuite par la fonction **memset()**.
+Elle s'exécute à la ligne 57 **((void (*)(void))active_spell)();**.
 
 ## **Stratégie d'exploitation**
 
@@ -133,5 +133,6 @@ id
 
 uid=0(root) gid=1000(linux) groups=1000(linux),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),122(lpadmin),134(lxd),135(sambashare)
 ```
+
 
 
