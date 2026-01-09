@@ -37,7 +37,7 @@ Une fois devenu Root, vous devez invoquer le terminal.
 | `push 0x3b`     | `6a 3b`        | Place 59 dans RAX (Numéro du syscall `execve`). |
 | `syscall`       | `0f 05`        | Exécute `/bin/sh`.                              |
 
-Certaine partie était manquante donc on fait de l'assemblage pour complèter le tableau.
+Certaines parties étaient manquantes, donc on fait de l'assemblage pour compléter le tableau.
 
 Par exemple:
 
@@ -133,3 +133,4 @@ id
 
 uid=0(root) gid=1000(linux) groups=1000(linux),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),122(lpadmin),134(lxd),135(sambashare)
 ```
+
