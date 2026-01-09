@@ -2,7 +2,7 @@
 
 ## **Identification de la vulnérabilité**
 
-C'est une vulnérabilté mémoire de type _HEAP-BASED_/_Use-After-Free_. On la retrouve dans la fonction **main** à la ligne **71** avec le **free(active_spell)**, suivi d'un **memset()** situé plus haut.
+C'est une vulnérabilté mémoire de type _HEAP-BASED_/_Use-After-Free_. On la retrouve dans la fonction **main** à la ligne **71** avec le **free(active_spell)** puis elle s'execute ligne 57 **((void (*)(void))active_spell)();**.
 
 ## **Analyse**
 
@@ -133,4 +133,5 @@ id
 
 uid=0(root) gid=1000(linux) groups=1000(linux),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),122(lpadmin),134(lxd),135(sambashare)
 ```
+
 
